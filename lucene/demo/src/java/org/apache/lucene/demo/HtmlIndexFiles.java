@@ -199,7 +199,7 @@ public class HtmlIndexFiles {
       Reader reader = new InputStreamReader(stream);
       DemoHTMLParser par = new DemoHTMLParser();
       DocData par_res = par.parse(new DocData(), "text", null, reader, new TrecContentSource());
-      Field titles = new TextField("titles", par_res.getTitle(), Field.Store.YES);
+      Field titles = new TextField("title", par_res.getTitle(), Field.Store.YES);
       Field contents = new TextField("contents",par_res.getBody(), Field.Store.YES);
       doc.add(titles);
       doc.add(contents);
