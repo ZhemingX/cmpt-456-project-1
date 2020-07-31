@@ -37,16 +37,17 @@ import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.demo.CMPT456Analyzer;
+import org.apache.lucene.demo.CMPT456Similarity;
 
 /** Simple command-line based search demo. */
-public class SearchFiles {
+public class TFIDFSearchFiles {
 
-  private SearchFiles() {}
+  private TFIDFSearchFiles() {}
 
   /** Simple command-line based search demo. */
   public static void main(String[] args) throws Exception {
     String usage =
-      "Usage:\tjava org.apache.lucene.demo.SearchFiles [-index dir] [-field f] [-repeat n] [-queries file] [-query string] [-raw] [-paging hitsPerPage]\n\nSee http://lucene.apache.org/core/4_1_0/demo/ for details.";
+      "Usage:\tjava org.apache.lucene.demo.TFIDFSearchFiles [-index dir] [-field f] [-repeat n] [-queries file] [-query string] [-raw] [-paging hitsPerPage]\n\nSee http://lucene.apache.org/core/4_1_0/demo/ for details.";
     if (args.length > 0 && ("-h".equals(args[0]) || "-help".equals(args[0]))) {
       System.out.println(usage);
       System.exit(0);
@@ -90,6 +91,8 @@ public class SearchFiles {
     
     IndexReader reader = DirectoryReader.open(FSDirectory.open(Paths.get(index)));
     IndexSearcher searcher = new IndexSearcher(reader);
+    //set similarity
+    searcher.setSimilarity(new CMPT456Similarity());
     //Analyzer analyzer = new StandardAnalyzer();
     Analyzer analyzer = new CMPT456Analyzer();
     BufferedReader in = null;
